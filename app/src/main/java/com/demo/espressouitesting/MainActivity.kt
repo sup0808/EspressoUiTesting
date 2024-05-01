@@ -14,7 +14,6 @@ class MainActivity : AppCompatActivity() {
 
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var mainViewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,30 +21,11 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        mainViewModel = ViewModelProvider(this, MainViewModelFactory(applicationContext))[MainViewModel::class.java]
 
-        setQuote(mainViewModel.getQuote())
-        binding.btnNext.setOnClickListener{
-            setQuote(mainViewModel.nextQuote())
-        }
 
-        binding.btnPrevious.setOnClickListener(previousClick)
-        binding.btnShare.setOnClickListener{
-            val intent = Intent(Intent.ACTION_SEND)
-            intent.type= "text/plain"
-            intent.putExtra(Intent.EXTRA_TEXT, mainViewModel.getQuote().text)
-            startActivity(intent)
-        }
+
     }
 
-    private val previousClick : OnClickListener = OnClickListener {
-        setQuote(mainViewModel.previosQuote())
-    }
-
-    private fun setQuote(quote : Quotes){
-        binding.txtTitle.text = quote.text
-        binding.txtWriter.text = quote.author
-    }
 
 
 
