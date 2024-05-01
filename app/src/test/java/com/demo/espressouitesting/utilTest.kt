@@ -23,9 +23,9 @@ class utilTest {
 
     @Test
     fun testGetUser(){
-        val utilObj = util()
+        val utilObj = util(testDispatcher)
         runTest {
-            utilObj.getName()
+            utilObj.getAddress()
         }
 
     }
