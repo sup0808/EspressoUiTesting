@@ -10,28 +10,21 @@ import org.junit.Assert.*
 
 import org.junit.After
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 
 class utilTest {
 
-    val testDispatcher = StandardTestDispatcher()
+    @get:Rule
+    val mainCoroutineRule : MainCoroutineRule = MainCoroutineRule()
 
-    @Before
-    fun setUp() {
-        Dispatchers.setMain(testDispatcher)
-    }
 
     @Test
     fun testGetUser(){
-        val utilObj = util(testDispatcher)
+        val utilObj = util(mainCoroutineRule.testDispatcher)
         runTest {
             utilObj.getAddress()
         }
 
-    }
-
-    @After
-    fun tearDown() {
-        Dispatchers.resetMain()
     }
 }
